@@ -1,19 +1,18 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
-import './App.css';
-import Post from "./components/Post";
-import Search from "./components/Search";
-import Pagination from "./components/Pagination";
+import {Post} from "./components/Post";
+import {Search} from "./components/Search";
+import {Pagination} from "./components/Pagination";
 
 const basePostsUrl = 'https://jsonplaceholder.typicode.com/posts';
 
-const App = () => {
+export const App = () => {
   const [posts, setPosts] = useState([])
   const [search, setSearch] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage] = useState(10)
 
-// eslint-disable-next-line
+  // eslint-disable-next-line
   useEffect(async () => {
     let res = await axios.get(basePostsUrl)
     setPosts(res.data)
@@ -61,6 +60,7 @@ const App = () => {
       post.body.toLowerCase().includes(search.toLowerCase())
   })
 
+  //Pagination function
   const paginate = (pageNum) => setCurrentPage(pageNum)
 
   return (
@@ -71,7 +71,10 @@ const App = () => {
       <Search setSearch={setSearch}/>
       <div>
         <h1>Posts {filteredPosts.length}</h1>
-        <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={posts.length}
+          paginate={paginate}/>
       </div>
       <Post
         posts={filteredPosts}
@@ -81,5 +84,3 @@ const App = () => {
     </div>
   )
 }
-
-export default App;

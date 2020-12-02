@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Post = ({posts, handleUpdate, handleDelete}) => {
+export const Post = ({posts, handleUpdate, handleDelete}) => {
   return (
     <div>
       {posts.length === 0 ?
@@ -31,5 +31,3 @@ const Post = ({posts, handleUpdate, handleDelete}) => {
     </div>
   )
 }
-
-export default Post;
